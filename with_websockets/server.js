@@ -1,3 +1,4 @@
+"use strict";
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -9,14 +10,22 @@ const path = require("path");
 const morgan = require("morgan");
 const compression = require("compression");
 const helmet = require("helmet");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
+// DB IMPORT
+const db = require("./models");
+
+// ROUTE IMPORTS
+const userRoutes = require("./routes/user");
+
 //////////////////////
 // MIDDLEWARE SETUP //
 //////////////////////
+
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(compression());
@@ -24,48 +33,13 @@ app.use(express.urlencoded({ extended: false })); // parse application/x-www-for
 app.use(express.json()); // parse application/json
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
+app.use(cors()); // allows any domain can make a request for the api
 
-//////////////
-// MONGOOSE //
-//////////////
-///////////////
-// IF NEEDED //
-///////////////
-/*
+////////////////
+// SET ROUTES //
+////////////////
 
-const mongoose = require("mongoose");
-
-// SETUP
-mongoose.set("debug", true);
-mongoose.Promise = global.Promise;
-
-// CONNECT
-mongoose.connect(
-  process.env.MONGO_URI || "mongodb://localhost/test",
-  error => {
-    if (error) {
-      console.error("Please make sure Mongodb is installed and running!"); // eslint-disable-line no-console
-      throw error;
-    }
-  },
-  {
-    keepAlive: true,
-    reconnectTries: Number.MAX_VALUE,
-    useMongoClient: true
-  }
-);
-
-*/
-
-app.get("/api/customers", (req, res) => {
-  const customers = [
-    { id: 1, firstName: "John", lastName: "Doe" },
-    { id: 2, firstName: "Brad", lastName: "Traversy" },
-    { id: 3, firstName: "Mary", lastName: "Swanson" }
-  ];
-
-  res.json(customers);
-});
+app.use("/api", userRoutes);
 
 //////////////
 // CATCHALL //
@@ -79,6 +53,7 @@ app.get("*", (req, res) => {
 /////////////////////
 // SOCKET IO SETUP //
 /////////////////////
+
 io.on("connection", socket => {
   console.log("Client connected", socket.id);
 

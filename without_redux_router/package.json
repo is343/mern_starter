@@ -16,7 +16,14 @@
     "nodemon": "^1.14.6"
   },
   "dependencies": {
+    "compression": "^1.7.2",
     "concurrently": "^3.5.1",
-    "express": "^4.16.2"
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "helmet": "^3.12.1",
+    "mongoose": "^5.1.1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.7"
   }
 }

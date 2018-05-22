@@ -19,48 +19,13 @@ app.use(express.urlencoded({ extended: false })); // parse application/x-www-for
 app.use(express.json()); // parse application/json
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
+app.use(cors()); // allows any domain can make a request for the api
 
-//////////////
-// MONGOOSE //
-//////////////
-///////////////
-// IF NEEDED //
-///////////////
-/*
+////////////////
+// SET ROUTES //
+////////////////
 
-const mongoose = require("mongoose");
-
-// SETUP
-mongoose.set("debug", true);
-mongoose.Promise = global.Promise;
-
-// CONNECT
-mongoose.connect(
-  process.env.MONGO_URI || "mongodb://localhost/test",
-  error => {
-    if (error) {
-      console.error("Please make sure Mongodb is installed and running!"); // eslint-disable-line no-console
-      throw error;
-    }
-  },
-  {
-    keepAlive: true,
-    reconnectTries: Number.MAX_VALUE,
-    useMongoClient: true
-  }
-);
-
-*/
-
-app.get("/api/customers", (req, res) => {
-  const customers = [
-    { id: 1, firstName: "John", lastName: "Doe" },
-    { id: 2, firstName: "Brad", lastName: "Traversy" },
-    { id: 3, firstName: "Mary", lastName: "Swanson" }
-  ];
-
-  res.json(customers);
-});
+app.use("/api", userRoutes);
 
 //////////////
 // CATCHALL //

@@ -6,7 +6,7 @@ import { Route } from "react-router";
 import { store, history } from "./store";
 import logo from "./logo.svg";
 import "./App.css";
-import Customers from "./components/Customer/customers";
+import Users from "./containers/users";
 
 class App extends Component {
   render() {
@@ -19,7 +19,7 @@ class App extends Component {
           </header>
           <ConnectedRouter history={history}>
             <div>
-              <Route exact path="/" component={Customers} />
+              <Route exact path="/" component={Users} />
             </div>
           </ConnectedRouter>
         </div>
