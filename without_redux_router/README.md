@@ -1,10 +1,6 @@
-# React Express Starter Pack
+# MERN Starter without redux or router
 
-> Create full stack apps with React and Express. Run your client and server with a single command. 
-
-### Redux Version
-This version does not include Redux
-[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter) 
+> does not include redux or router
 
 ## Quick Start
 
