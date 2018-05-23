@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const db = require("../models");
-var middleware = require("../middleware");
+const middleware = require("../middleware");
 
 router.get("/users", middleware.dummyUserData, getAllUserInfo);
 

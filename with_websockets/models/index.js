@@ -13,7 +13,7 @@ mongoose.connect(
   process.env.MONGO_URI || "mongodb://localhost/test",
   error => {
     if (error) {
-      console.error("Please make sure Mongodb is installed and running!"); // eslint-disable-line no-console
+      console.error("Please make sure Mongodb is installed and running!");
       throw error;
     }
   },

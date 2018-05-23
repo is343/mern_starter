@@ -7,7 +7,7 @@ class SocketTest extends Component {
 
     this.state = {
       endpoint: "http://localhost:5000/",
-      color: "white"
+      color: "white",
     };
   }
 
@@ -17,14 +17,9 @@ class SocketTest extends Component {
     socket.emit("change color", this.state.color); // change 'red' to this.state.color
   };
 
-  ///
-
-  // adding the function
   setColor = color => {
     this.setState({ color });
   };
-
-  ///
 
   render() {
     // testing for socket connections
